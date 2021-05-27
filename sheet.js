@@ -3,7 +3,7 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 module.exports = class Sheet {
 
     constructor() {
-        this.doc = new GoogleSpreadsheet('1kswl-tfCIoeTMbHHH08VVW8QdGZy1EMevjWnXHk0cIc');
+        this.doc = new GoogleSpreadsheet('1HrhmqxPqS8Qs0QWge-TN40jOp_cUHJX0ROk5KIqwsxQ');
     }
 
     async load() {
@@ -11,9 +11,15 @@ module.exports = class Sheet {
         await this.doc.loadInfo();
     }
 
-    async addRows(rows) {
-        const sheet = this.doc.sheetsByIndex[0];
+    async addRows(rows, i) {
+        const sheet = this.doc.sheetsByIndex[i];
         await sheet.addRows(rows);
+    }
+
+    async getRows(i) {
+        const sheet = this.doc.sheetsByIndex[i];
+        const rows = await sheet.getRows();
+        return rows;
     }
 
 }
